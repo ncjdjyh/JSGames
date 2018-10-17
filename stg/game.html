@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>game 1</title>
+        <style media="screen">
+            canvas {
+                border: 1px black solid;
+            }
+        </style>
+        <!-- gua game 相关文件 -->
+        <script src='guagame/utils.js'></script>
+        <script src='guagame/mouse.js'></script>
+        <script src='guagame/gua_game.js'></script>
+        <script src='guagame/gua_scene.js'></script>
+        <script src="guagame/gua_image.js"></script>
+				<script src="guagame/config.js"></script>
+        <!-- 场景文件 -->
+        <script src='scene/main/paddle.js'></script>
+        <script src='scene/main/ball.js'></script>
+        <script src='scene/main/block.js'></script>
+        <script src='scene/main/scene.js'></script>
+        <script src='scene/main/cloud.js'></script>
+        <script src='scene/main/particleSystem.js'></script>
+        <script src='scene/main/particle.js'></script>
+        <script src='scene/main/enemy.js'></script>
+        <script src='scene/main/player.js'></script>
+        <script src='scene/main/level.js'></script>
+        <script src='scene/main/bullet.js'></script>
+        <!-- 结束和标题场景 -->
+        <script src='scene/end/scene_end.js'></script>
+        <script src='scene/title/scene_title.js'></script>
+        <!-- 关卡数据 -->
+        <script src='levelConfig.js'></script>
+    </head>
+    <body>
+        <canvas id="id-canvas" width="400" height="600"></canvas>
+        <hr>
+        <div id="debug">
+            <div class="">
+                <!-- <textarea id="id-text-log" rows="20" cols="50"></textarea> -->
+            </div>
+            <!--<div class="">-->
+                <!--<label>-->
+                    <!--<input type=range class="gua-auto-slider"-->
+                        <!--value=""-->
+                        <!--data-value="config.player_speed"-->
+                        <!--&gt;-->
+                    <!--玩家速度:-->
+                    <!--<span class="gua-label"></span>-->
+                <!--</label>-->
+            <!--</div>-->
+        </div>
+        <script src=main.js></script>
+        <script>
+            var es = sel => document.querySelectorAll(sel)
+
+            var bindAll= function(sel, eventName, callback) {
+              var l = es(sel)
+              for (var i = 0; i < l.length; i++) {
+                l[i].addEventListener(eventName, function(event){
+                  callback(event)
+                })
+              }
+            }
+
+            bindDebugSlider('player_speed', 1, 30)
+            bindDebugSlider('level', 1, 5)
+            bindDebugSlider('chapter', 1, 5)
+            bindDebugSlider('cloud_speed', 1, 20)
+            bindDebugSlider('fps', 5, 200)
+            bindAll('.gua-auto-slider', 'input', function(event){
+              var target = event.target
+              //绑定的值
+              var bindVar = target.dataset.value
+              //输入的值
+              var v = target.value
+              eval(bindVar + '=' + v)
+              var label = target.closest('label').querySelector('.gua-label')
+              label.innerText = v
+            })
+        </script>
+    </body>
+</html>
